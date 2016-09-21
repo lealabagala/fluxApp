@@ -18,6 +18,12 @@ var TodoActions = {
       actionType: TodoConstants.TODO_CREATE,
       text: text
     });
+  },
+  destroy: function (id) {
+    AppDispatcher.dispatch({
+      actionType: TodoConstants.TODO_DESTROY,
+      id: id
+    });
   }
 };
 

@@ -35,15 +35,18 @@ var TodoApp = React.createClass({
               <span className="input-group-btn">
               <button className="btn btn-danger" onClick={this.handleClick}>Add</button> </span>
             </div>
-            <ul className="list-group">
-              {this.state.allTodos.map(
-                  function (todo, i) {
-                    return (
-                        <TodoItem key={todo.i} data={todo}/>
-                    );
-                  })
-              }
-            </ul>
+            <div>
+              <ul className="list-group">
+                {this.state.allTodos.map(
+                    function (todo) {
+                      var boundClick = this._onDestroyClick.bind(this, todo.id);
+                      return (
+                          <TodoItem key={todo.id} data={todo} deleteItem={boundClick}/>
+                      );
+                    }, this)
+                }
+              </ul>
+            </div>
           </div>
 
         </div>
@@ -56,6 +59,16 @@ var TodoApp = React.createClass({
     TodoActions.create(text);
   },
 
+
+  _onDestroyClick: function (i) {
+    // console.log(i);
+    TodoActions.destroy(i);
+  },
+
+  showAlert: function () {
+    alert('hello');
+  },
+
   _onChange: function () {
     this.setState(getTodoState());
   }
@@ -65,7 +78,8 @@ var TodoApp = React.createClass({
 class TodoItem extends React.Component {
   render() {
     return (
-        <li className="list-group-item">{this.props.data.text}
+        <li className="list-group-item" onClick={this.props.deleteItem}>
+          {this.props.data.text}
           <span className="badge">
             <span className="glyphicon glyphicon-trash"></span>
           </span>

@@ -29,6 +29,11 @@ function create(text) {
   console.log(allTodos);
 }
 
+
+function destroy(id) {
+  delete allTodos[id];
+}
+
 var TodoStore = assign({}, EventEmitter.prototype, {
 
   areAllComplete: function () {
@@ -67,6 +72,10 @@ AppDispatcher.register(function (action) {
         create(text);
         TodoStore.emitChange();
       }
+      break;
+    case TodoConstants.TODO_DESTROY:
+      destroy(action.id);
+      TodoStore.emitChange();
       break;
     default:
       break;
