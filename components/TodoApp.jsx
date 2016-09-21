@@ -26,12 +26,16 @@ var TodoApp = React.createClass({
   render: function () {
     return (
         <div>
-          <div>
-            <input ref="inputField" type="text"/>
-            <button onClick={this.handleClick}>Add</button>
-          </div>
-          <div>
-            <ul>
+
+
+          <div className="col-lg-3">
+            <br/>
+            <div className="input-group">
+              <input className="form-control" ref="inputField" type="text"/>
+              <span className="input-group-btn">
+              <button className="btn btn-danger" onClick={this.handleClick}>Add</button> </span>
+            </div>
+            <ul className="list-group">
               {this.state.allTodos.map(
                   function (todo, i) {
                     return (
@@ -41,6 +45,7 @@ var TodoApp = React.createClass({
               }
             </ul>
           </div>
+
         </div>
     );
   },
@@ -60,7 +65,15 @@ var TodoApp = React.createClass({
 class TodoItem extends React.Component {
   render() {
     return (
-        <li>{this.props.data.text}</li>
+        <li className="list-group-item">{this.props.data.text}
+          <span className="badge">
+            <span className="glyphicon glyphicon-trash"></span>
+          </span>
+          &nbsp;&nbsp;
+          <span className="badge">
+            <span className="glyphicon glyphicon-pencil"></span>
+          </span>
+        </li>
     );
   }
 }
