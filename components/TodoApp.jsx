@@ -26,8 +26,6 @@ var TodoApp = React.createClass({
   render: function () {
     return (
         <div>
-
-
           <div className="col-lg-3">
             <br/>
             <div className="input-group">
@@ -61,12 +59,7 @@ var TodoApp = React.createClass({
 
 
   _onDestroyClick: function (i) {
-    // console.log(i);
     TodoActions.destroy(i);
-  },
-
-  showAlert: function () {
-    alert('hello');
   },
 
   _onChange: function () {
@@ -78,10 +71,10 @@ var TodoApp = React.createClass({
 class TodoItem extends React.Component {
   render() {
     return (
-        <li className="list-group-item" onClick={this.props.deleteItem}>
+        <li className="list-group-item">
           {this.props.data.text}
           <span className="badge">
-            <span className="glyphicon glyphicon-trash"></span>
+            <span className="glyphicon glyphicon-trash" onClick={this.props.deleteItem}></span>
           </span>
           &nbsp;&nbsp;
           <span className="badge">
